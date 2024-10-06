@@ -29,3 +29,47 @@ p{
     word-spacing: 8px;
 }
 
+.ejemploCajas{
+    border: 2px solid black;
+    /* 1 parametro = aplica para los 4 lados*/
+    /*padding: 10 px;*/
+    
+   /*2 param = top/bottom - lef/right*/
+   /*padding: 20px 10px;*/
+   
+   /* 3 parametro = top -left/right - bottom*/
+   /*padding: 20px 10px 15px*/
+   
+   /*4 param = top - right - bottom - left*/
+   /*padding: 20px 10px 15px 30px;
+   margin: 20px 10px 15px 30px;*/
+   width: 50%;
+   text-align: center;
+   margin: 0 auto; 
+}
+
+/*seudoclases*/
+a:link{
+    color: crimson;
+    background-color: aquamarine;
+    border: 2px solid aquamarine;
+    margin: 10px;
+    /*padding: 4px;*/
+    border-radius: 25px; /*es el redondeado que le va a dar a los bordes*/
+}
+
+a:visited{
+    color: black;
+    /*background-color: chocolate;*/
+}
+
+a:hover{
+    color: white;
+    background-color: green;
+    transition: 1.5s; /*el tiempo que tarda aplicando los estilos originales al cambio*/
+}
+
+a:active{
+    color: white;
+    background-color: purple;
+}

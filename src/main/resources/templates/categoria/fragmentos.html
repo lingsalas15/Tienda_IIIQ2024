@@ -119,8 +119,8 @@
                           th:action="@{/categoria/guardar}" 
                           th:object="${categoria}"
                           class="was-validated"                          
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
+                          enctype="multipart/form-data"> <!-- es importante porque permite enviar los datos de la vista al controlador -->
+                        <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/> 
                         <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
                         <section th:replace="~{categoria/fragmentos :: botonesEditar}"/>
                         <div id=details>

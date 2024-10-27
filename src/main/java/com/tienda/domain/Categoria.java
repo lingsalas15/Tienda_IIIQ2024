@@ -6,9 +6,6 @@ import java.io.Serializable;
 //import jakarta.persistence.Table;
 import lombok.Data;
 
-/*
- * @author dsala
- */
 
 //las anotcaciones van encima de las clases, siempre
 @Data 

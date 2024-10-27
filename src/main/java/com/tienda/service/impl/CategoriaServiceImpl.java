@@ -12,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author dsala
  */
-@Service
+@Service /*Esto es esencial para que funcione*/
 public class CategoriaServiceImpl implements CategoriaService {
 
-    @Autowired
-    private CategoriaDao categoriaDao;
+    @Autowired /*Esto es para importar lo que necesitamos*/
+    private CategoriaDao categoriaDao; /*es privado porque nadie fuera de ella deberia usarlo*/
 
     @Override
     public List<Categoria> getCategorias(boolean activos) {

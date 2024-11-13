@@ -19,4 +19,13 @@ public interface ProductoService {
     // Se elimina el producto que tiene el id pasado por parámetro
     public void delete(Producto producto);
 
+    //para disponivilizar/devolver el metodo que creamos en productoDao en la linea 15
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup); //el metodo puede tener el nombre que quiera, pero los parametros deben ser los mismos
+
+    //Lista de productos utilizando consultas con JPQL    
+    public List<Producto> metodoJPQL(double precioInf, double precioSup);
+
+    //Lista de productos utilizando consultas con SQL Nativo
+    public List<Producto> metodoNativo(double precioInf, double precioSup);
+
 }

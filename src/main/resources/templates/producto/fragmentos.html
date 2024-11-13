@@ -44,7 +44,7 @@
                                     <label for="categoria.idCategoria">[[#{producto.categoria}]]</label>
                                     <select name="categoria.idCategoria" class="form-select">
                                         <option th:each="item : ${categorias}"
-                                                th:value="${item.idCategorias}"
+                                                th:value="${item.idCategoria}"
                                                 th:text="${item.descripcion}">
                                         </option>
                                     </select>
@@ -108,7 +108,6 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="producto, contador : ${productos}">
-                                            <!-- los [[]] son para interpretar el code -->
                                             <td>[[${contador.count}]]</td>
                                             <td>[[${producto.descripcion}]]</td>
                                             <td>[[${producto.categoria.descripcion}]]</td> <!-- va a mostrar el nombre -->
@@ -168,7 +167,7 @@
                                                         <label for="categoria.idCategoria">[[#{producto.categoria}]]</label>
                                                         <select name="categoria.idCategoria" th:field="*{categoria.idCategoria}" class="form-select">
                                                             <option th:each="item : ${categorias}"
-                                                                    th:value="${item.idCategorias}"
+                                                                    th:value="${item.idCategoria}"
                                                                     th:text="${item.descripcion}">
                                                             </option>
                                                         </select>

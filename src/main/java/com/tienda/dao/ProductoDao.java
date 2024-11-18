@@ -23,6 +23,7 @@ public interface ProductoDao extends JpaRepository<Producto, Long> { //se trabaj
 
     //en el findBy debe ir el nombre de un atributo 
     //Al ser un atributo de tipo string se debe definir()
-    List<Producto> findByDescripcionContainingOrderByPrecio(String descripcion);
+    List<Producto> findByDescripcionContainingOrderByPrecio(String descripcion); //PUEDE DEVOLVER VARIOS PRODUCTOS
+    
 
 }

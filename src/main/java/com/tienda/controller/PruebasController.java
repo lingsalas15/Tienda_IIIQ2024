@@ -85,5 +85,14 @@ public class PruebasController {
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
+    
+    @PostMapping("/QueryName") //recurso a buscar
+    public String consultaQueryName(@RequestParam(value = "productName") String nombre, Model model) { //en el value es el nombre del INPUT
+        var productos = productoService.buscarPorNombre(nombre);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+        model.addAttribute("productName", nombre);
+        return "/pruebas/listado2";
+    }
 
 }

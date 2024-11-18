@@ -30,4 +30,8 @@ public interface ProductoService {
     
     public List<Producto> buscarPorNombre(String nombre); //debo hacer la implementacion en service.impl
 
+    //Lista de productos por Categoria
+    //public List<Producto> buscarPorCategoria(Long idCategoria);
+    
+    List<Producto> findByCategoriaAndActivo(Long idCategoria, boolean activo);
 }

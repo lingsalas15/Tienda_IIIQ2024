@@ -19,7 +19,7 @@ public class PruebasController {
 
     @Autowired
     private ProductoService productoService;
-    
+
     @Autowired
     private CategoriaService categoriaService;
 
@@ -42,9 +42,9 @@ public class PruebasController {
         model.addAttribute("categorias", categorias);
         return "/pruebas/listado";
     }
-    
+
     //TRAE TODOS TODOS TODOS LOS PRODUCTOS Y LOS MUESTRA
-     //Los métodos siguientes son para la prueba de consultas ampliadas
+    //Los métodos siguientes son para la prueba de consultas ampliadas
     @GetMapping("/consulta") ///porque en el menu en la linea 48 va a consulta
     public String listado2(Model model) {
         var productos = productoService.getProductos(false);
@@ -63,12 +63,12 @@ public class PruebasController {
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
-    
+
     @PostMapping("/query2")
     public String consultaQuery2(@RequestParam(value = "precioInf") double precioInf,
             @RequestParam(value = "precioSup") double precioSup, Model model) {
         var productos = productoService.metodoJPQL(precioInf, precioSup);
-        model.addAttribute("productos", productos);        
+        model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());
         model.addAttribute("precioInf", precioInf);
         model.addAttribute("precioSup", precioSup);
@@ -85,7 +85,7 @@ public class PruebasController {
         model.addAttribute("precioSup", precioSup);
         return "/pruebas/listado2";
     }
-    
+
     @PostMapping("/QueryName") //recurso a buscar
     public String consultaQueryName(@RequestParam(value = "productName") String nombre, Model model) { //en el value es el nombre del INPUT
         var productos = productoService.buscarPorNombre(nombre);
@@ -95,4 +95,35 @@ public class PruebasController {
         return "/pruebas/listado2";
     }
 
+    /*@PostMapping("/Practica") //recurso a buscar
+    public String consultaPractica(@RequestParam(value = "idCategoria") Long idCategoria,Model model) { //en el value es el nombre del INPUT
+        var productos = productoService.buscarPorCategoria(idCategoria);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+        model.addAttribute("idCategoria", idCategoria);
+        return "/pruebas/practica";
+    }*/
+ /*@PostMapping("/practica")
+    public String consultaPractica(@RequestParam(value = "categoriaId") Long categoriaId,
+                                    @RequestParam(value = "activo") boolean activo,
+                                    Model model) {
+        List<Producto> productos = productoService.buscarPorCategoriaYEstado(categoriaId, activo);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+        model.addAttribute("categoriaId", categoriaId);
+        model.addAttribute("activo", activo);
+        return "/pruebas/practica"; 
+    }*/
+    
+    @PostMapping("/practica")
+    public String buscarPorCategoriaYActivo(@RequestParam("idCategoria") Long idCategoria,
+            @RequestParam("activo") boolean activo, Model model) {
+        var productos = productoService.findByCategoriaAndActivo(idCategoria, activo);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+        model.addAttribute("idCategoria", idCategoria);
+        model.addAttribute("activo", activo);
+        return "/pruebas/practica";
+    }
+    
 }

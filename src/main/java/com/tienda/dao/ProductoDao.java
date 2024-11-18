@@ -24,6 +24,13 @@ public interface ProductoDao extends JpaRepository<Producto, Long> { //se trabaj
     //en el findBy debe ir el nombre de un atributo 
     //Al ser un atributo de tipo string se debe definir()
     List<Producto> findByDescripcionContainingOrderByPrecio(String descripcion); //PUEDE DEVOLVER VARIOS PRODUCTOS
+   
+    //Consulta ampliada para buscar por Categoría
+    //List<Producto> findByCategoriaId(Long idCategoria);
     
+    //List<Producto> findByCategoriaIdAndActivo(Long categoriaId, boolean activo);
+    
+    @Query("SELECT p FROM Producto p WHERE p.categoria.idCategoria = :idCategoria AND p.activo = :activo")
+    List<Producto> findByCategoriaAndActivo(@Param("idCategoria") Long idCategoria, @Param("activo") boolean activo);
 
 }

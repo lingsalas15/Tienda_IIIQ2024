@@ -15,37 +15,36 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 /*Esto es esencial para que funcione*/
 public class ProductoServiceImpl implements ProductoService {
-    
+
     @Autowired
     /*Esto es para importar lo que necesitamos*/
     private ProductoDao productoDao;
 
     /*es privado porque nadie fuera de ella deberia usarlo*/
-    
     @Override
     public List<Producto> getProductos(boolean activos) {
         List<Producto> lista = productoDao.findAll();
-        
+
         if (activos) {
             //remueve de la lista los elemtnos donde el atributo activo es false
             lista.removeIf(e -> !e.isActivo()); //remueven los que cumplen con esta condicion
         }
-        
+
         return lista;
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Producto getProducto(Producto producto) {
         return productoDao.findById(producto.getIdProducto()).orElse(null);
     }
-    
+
     @Override
     @Transactional
     public void save(Producto producto) {
         productoDao.save(producto);
     }
-    
+
     @Override
     @Transactional
     public void delete(Producto producto) {
@@ -58,23 +57,42 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> findByPrecioBetweenOrderByDescripcion(double precioInf, double precioSup) {
         return productoDao.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
     }
-    
+
     @Override
-    @Transactional(readOnly = true)    
+    @Transactional(readOnly = true)
     public List<Producto> metodoJPQL(double precioInf, double precioSup) {
         return productoDao.metodoJPQL(precioInf, precioSup);
     }
-    
+
     @Override
-    @Transactional(readOnly = true)    
+    @Transactional(readOnly = true)
     public List<Producto> metodoNativo(double precioInf, double precioSup) {
         return productoDao.metodoNativo(precioInf, precioSup);
     }
-    
+
     @Override
-    @Transactional(readOnly = true)    
+    @Transactional(readOnly = true)
     public List<Producto> buscarPorNombre(String nombre) {
         return productoDao.findByDescripcionContainingOrderByPrecio(nombre); //hay que ir al controlador
+    }
+
+    /* @Override
+    @Transactional(readOnly = true)
+    public List<Producto> buscarPorCategoria(Long idCategoria) {
+    return productoDao.findByCategoriaId(idCategoria);
+    }*/
+
+ /*@Override
+    @Transactional(readOnly = true) 
+    public List<Producto> buscarPorCategoriaYEstado(Long categoriaId, boolean activo) {
+       return productoDao.findByCategoriaIdAndActivo(categoriaId, activo);
+    }*/
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findByCategoriaAndActivo(Long idCategoria, boolean activo) {
+        return productoDao.findByCategoriaAndActivo(idCategoria, activo);
+
     }
     
 }

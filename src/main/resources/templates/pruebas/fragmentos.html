@@ -183,6 +183,50 @@
                     </div>
                     <div class="col-md-3"></div>
                 </div>
+                <div class="row py-2">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <form method="POST" th:action="@{/pruebas/practica}" class="was-validated">
+                            <div class="card">
+                                <div class="card-body">
+                                    <!-- Categoría con Dropdown -->
+                                    <div class="mb-3">
+                                        <label for="idCategoria">Categoría</label>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Selecciona una categoría
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li th:each="categoria : ${categorias}">
+                                                    <a class="dropdown-item" href="#" 
+                                                       th:data-value="${categoria.idCategoria}" 
+                                                       th:text="${categoria.descripcion}" 
+                                                       onclick="selectCategory(this)"></a>
+                                                </li>
+                                            </ul>
+                                            <!-- Input oculto para almacenar el valor seleccionado -->
+                                            <input type="hidden" id="idCategoria" name="idCategoria" required />
+                                        </div>
+                                    </div>
+
+                                    <!-- Activo -->
+                                    <div class="mb-3">
+                                        <label for="activo">Activo</label>
+                                        <input type="checkbox" name="activo" value="true" />
+                                    </div>
+                                </div>
+
+                                <!-- Botón para enviar el formulario -->
+                                <div class="card-footer text-center">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-check"></i> Buscar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
             </div>
         </section> 
     </body>

@@ -20,11 +20,11 @@ public class IndexController {
         //return "layout/plantilla"; //se hace asi en caso de que haya un folder, nunca se coloca el html
     }
     
-    @RequestMapping("/contacto") //el mapping no necesariamente se llama igual que el return vista
+   /* @RequestMapping("/contacto") //el mapping no necesariamente se llama igual que el return vista
     public String paginaContacto(Model model) {
         //model.addAttribute("attribute", "value");
         return "info"; //las vistas que buscan los controllers son las de los templates
         //return "layout/plantilla"; //se hace asi en caso de que haya un folder, nunca se coloca el html
-    }
+    }*/
     
 }

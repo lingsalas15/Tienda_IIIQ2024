@@ -1,30 +1,42 @@
-
 package com.tienda.controller;
 
+import com.tienda.domain.Item;
+import com.tienda.service.ItemService;
+import com.tienda.service.ProductoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author dsala
- */
 @Controller
 public class IndexController {
-    
-    //se usa para mapear un recurso que pide el usuario con un metodo
-    @RequestMapping("/") //el mapping no necesariamente se llama igual que el return vista
-    public String paginaInicio(Model model) {
-        //model.addAttribute("attribute", "value");
-        return "index"; //las vistas que buscan los controllers son las de los templates
-        //return "layout/plantilla"; //se hace asi en caso de que haya un folder, nunca se coloca el html
+
+    @Autowired
+    ProductoService productoService;
+
+    @RequestMapping("/")
+    public String page(Model model) {
+        var listaProductos = productoService.getProductos(true);
+        model.addAttribute("productos", listaProductos);
+        return "index";
     }
-    
-   /* @RequestMapping("/contacto") //el mapping no necesariamente se llama igual que el return vista
-    public String paginaContacto(Model model) {
-        //model.addAttribute("attribute", "value");
-        return "info"; //las vistas que buscan los controllers son las de los templates
-        //return "layout/plantilla"; //se hace asi en caso de que haya un folder, nunca se coloca el html
-    }*/
-    
+
+    @Autowired
+    private ItemService itemService;
+
+    @RequestMapping("/refrescarBoton")
+    public ModelAndView refrescarBoton(Model model) {
+        var lista = itemService.gets();
+        var totalCarritos = 0;
+        var carritoTotalVenta = 0;
+        for (Item i : lista) {
+            totalCarritos += i.getCantidad();
+            carritoTotalVenta += (i.getCantidad() * i.getPrecio());
+        }
+        model.addAttribute("listaItems", lista);
+        model.addAttribute("listaTotal", totalCarritos);
+        model.addAttribute("carritoTotal", carritoTotalVenta);
+        return new ModelAndView("/carrito/fragmentos :: verCarrito");
+    }
 }
